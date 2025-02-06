@@ -4,6 +4,8 @@ from . import views
 
 
 #URL Patterns
-urlpatterns = {
-  path(r'', views.home, name="home"),
-}
+urlpatterns = [
+ # path(r'', views.home, name="home"),
+  path(r'', views.home_page, name="home_page"),
+  path(r'about', views.about, name="about_page"),
+]
