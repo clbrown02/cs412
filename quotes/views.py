@@ -28,7 +28,16 @@ def home_page(request):
 
 
 def about(request):
-   tempplate_name = 'quotes/about.html'
-   context = {}
+   template_name = 'quotes/about.html'
+   
 
-   return render(request, tempplate_name)
+   return render(request, template_name)
+
+def show_all(request):
+   template_name = 'quotes/show_all.html'
+   context = { 
+      'quotes': quotes,
+      'images': images
+   }
+   return render(request, template_name, context )
+
