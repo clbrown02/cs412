@@ -1,6 +1,10 @@
 {% extends 'quotes/base.html' %}
-
+{% load static %}
   {% block content %}
-    <h1>Testing the main quote page</h1>
+    <p>{{selected_quote}}</p>
+    <br>
+    
+    <br>
+    <img src="{% static selected_image %}" alt="Photo of Kanye" width="500">
 
   {% endblock %}
