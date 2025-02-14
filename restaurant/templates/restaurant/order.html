@@ -1,0 +1,56 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+
+<h2>Place an order</h2>
+<div>
+  <form action="{% url 'submit'}" method="POST">
+    <input type="checkbox" id="item1" name="item1" value="Six beef tacos">
+    <label for="item1">Six beef tacos  ($9)</label><br>
+    <input type="checkbox" id="item2" name="item2" value="Six tripa tacos">
+    <label for="item2">Six tripa tacos  ($9)</label><br>
+    <input type="checkbox" id="item3" name="item3" value="Charro Beans">
+    <label for="item1">Charro beans  ($6)</label><br>
+    <input type="checkbox" id="item4" name="item4" value="Quesabirria">
+    <label for="item1">Quesabirria  ($8)</label><br>
+    <br>
+
+    <fieldset>
+      <legend>Extras:</legend>
+      <input type="checkbox" name="toppings1" id="toppings1" value="Guacamole">
+      <label for="toppings1">Guacamole  ($4)</label><br>
+      <input type="checkbox" name="toppings2" id="toppings2" value="Grilled onions">
+      <label for="toppings1">Grilled onions  ($2)</label><br>
+      <input type="checkbox" name="toppings3" id="toppings3" value="Salsas">
+      <label for="toppings1">Salsas  (Free)</label><br>
+      <input type="checkbox" name="toppings4" id="toppings4" value="Tortillas">
+      <label for="toppings1">Corn tortillas  $1</label>
+    </fieldset>
+
+    <h4>Daily Special:</h4>
+      <input  type="checkbox" name="special" id="special" value="{{ random_daily }}">
+      <label for="special">{{ random_daily }}</label>
+
+
+    <h4>Special Instructions</h4>
+    <p>Please write down any special requests:</p>
+    <textarea name="requests" id="requests" rows="4" cols="50"></textarea>
+
+    <h4>Customer Information</h4>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name"><br>
+    <label for="name">Phone:</label>
+    <input type="text" name="phone" id="phone"><br>
+    <label for="name">Email:</label>
+    <input type="email" name="email" id="email"><br>
+
+
+    <h4>Place your order!</h4>
+    <input type="submit">
+
+  </form>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+{% block content %}
+
+<h2>Welcome to Taco de la Frontera!</h2>
+
+<img src="{% static 'restaurant.jpg' %}" alt="Photo of our restaurant">
+
+<p>We are located at: 2450 Rainy Day Drive, Boston MA</p>
+
+<table>
+  <tr>
+  <th>Monday</th>
+  <th>Tuesday</th>
+  <th>Wednesday</th>
+  <th>Thursday</th>
+  <th>Friday</th>
+  <th>Saturday</th>
+  <th>Sunday</th>
+  </tr>
+  <tr>
+    <td>11:00am - 9:00pm</td>
+    <td>11:00am - 9:00pm</td>
+    <td>11:00am - 9:00pm</td>
+    <td>11:00am - 9:00pm</td>
+    <td>11:00am - 11:00pm</td>
+    <td>12:00pm - 7:00pm</td>
+    <td>12:00am - 7:00pm</td>
+  </tr>
+</table>
+
+
+{% endblock %}

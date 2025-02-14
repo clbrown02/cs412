@@ -1,0 +1,26 @@
+{% load static %}
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tacos de la frontera</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+  </head>
+  <header>
+    <nav>
+      <h1>Tacos de la frontera</h1>
+      <li><a href="{% url 'main_page' %}">Main Page</a></li>
+      <li><a href="{% url 'order_page' %}">Order Page</a></li>
+    </nav>
+  </header>
+
+  <body>
+
+    
+
+    {% block content %}
+
+    {% endblock %}
+
+  </body>
+</html>
