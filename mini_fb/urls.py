@@ -1,3 +1,6 @@
 from django.urls import path
+from .views import ShowAllProfilesView
 
-urlpatterns = []
+urlpatterns = [
+  path('', ShowAllProfilesView.as_view(), name="show_all"),
+]
