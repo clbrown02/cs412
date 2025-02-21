@@ -1,0 +1,22 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<table>
+  <tr>
+    <th>Profile Picture</th>
+    <th>Name</th>
+    <th>Hometown</th>
+    <th>How to contact</th>
+  </tr>
+<tr>
+  <td><img class="pfp" src="{{profile.profile_image_url}}" alt="" width="300" height="300"></td>
+  <td><p>{{profile.first_name}} {{profile.last_name}}</p></td>
+  <td><p>{{profile.city}}</p></td>
+  <td><p>{{profile.email}}</p></td>
+</tr>
+</table>
+
+
+
+{% endblock %}
