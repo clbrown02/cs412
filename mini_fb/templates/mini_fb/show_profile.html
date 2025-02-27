@@ -17,6 +17,16 @@
 </tr>
 </table>
 
+<div>
+<h2>{{profile.first_name}}'s Status <a href="{% url 'create_status' profile.pk %}">New Status Message</a></h3><hr>
+
+{% for status_message in profile.get_status_messages %}
+<div class="statusm">
+<p class="msg"><b><i>{{status_message.message}}</i> - {{status_message.timestamp}}</b></p>
+</div>
+{% endfor %}
+<hr>
+</div>
 
 
 {% endblock %}

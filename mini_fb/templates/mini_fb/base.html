@@ -6,15 +6,18 @@
     <link rel="stylesheet" href="{% static 'styles-fb.css' %}">
   </head>
 
+  
+
   <body>
     <header>
       <h1>Mini Facebook</h1>
-      <nav>
-        <ul>
-
-        </ul>
-      </nav>
+      <div class="topnav">
+            <a class="active" href="{% url 'create_profile' %}">Create A Profile</a>
+            <a class='active' href="{% url 'show_all' %}">Show All Profiles</a>
+      
+      </div>
     </header>
+    <br><br>
 
     {% block content %}
 
