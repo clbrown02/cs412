@@ -8,13 +8,20 @@
 <main class="grid-container">
   
   <article class="featured">
-    <img src="{{article.image_url}}" alt="">
+    {% if article.image_file %}
+    <img src="{{article.image_file.url}}" alt="">
+    {% else %}
+    <h3>No Image</h3>
+    {% endif %}
     <div>
       <h2>{{article.title}}</h2>
       <h3>by {{article.author}} at {{article.published}}</h3>
       <p>
         {{article.text}}
       </p>
+      <h3>
+        <a href="{% url 'update_article' article.pk %}">Update Article</a>
+      </h3>
     </div>
 
     
@@ -32,6 +39,8 @@
       <p>
         {{comment.text}}
       </p>
+      <!-- Link to delete this comment -->
+       <a href="{% url 'delete_comment' comment.pk %}">Delete</a>
     </div>
 
     {% endfor %}
