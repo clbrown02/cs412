@@ -1,0 +1,24 @@
+<!-- mini_fb/delelte_status_form.html -->
+ {% extends 'mini_fb/base.html' %}
+ {% block content %}
+
+ <h3>Are you sure you want to delete this status?</h3>
+ <p>
+  {{statusmessage}}
+ </p>
+ {% for img in statusmessage.get_images %}
+<img src="{{img.image.image_file.url}}" alt="{{img.image.url}}">
+ {% endfor %}
+
+ <!-- form to submit the delete request -->
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+  <!-- form to cancel the delte request -->
+   <form action="{% url 'show_profile' statusmessage.profile.pk %}">
+    {% csrf_token %}
+    <input type="submit" value="Cancel">
+  </form>
+
+  {% endblock %}
