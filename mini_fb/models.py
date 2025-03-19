@@ -21,10 +21,23 @@ class Profile(models.Model):
     status_message = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
     return status_message
   
+  def get_friends(self):
+    '''Return a list of friend's profiles '''
+    friends = []
+    for friend in Friend.objects.filter(profile1=self):
+      friends.append(friend.profile2)
+    
+    for friend in Friend.objects.filter(profile2=self):
+      friends.append(friend.profile1)
+    
+    return friends
+
+  
   def get_absolute_url(self):
     '''Provide a URL after creating a new Profile'''
     return reverse('show_profile', kwargs={'pk':self.pk})
 
+  
   
 class StatusMessage(models.Model):
   '''Encapsulates the data of a status message'''
@@ -55,3 +68,13 @@ class StatusImage(models.Model):
 
   image = models.ForeignKey(Image, on_delete=models.CASCADE)
   status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
+
+class Friend(models.Model):
+  '''Encapsulates the idea of an edge connecting two nodes within the social network'''
+  profile1 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile1")
+  profile2 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile2")
+  timestamp = models.DateTimeField(auto_now=True)
+
+  def __str__(self):
+    '''Method to view this relationship as a string representation'''
+    return f'{self.profile1} & {self.profile2}'
