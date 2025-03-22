@@ -1,0 +1,25 @@
+{% extends "mini_fb/base.html" %}
+
+{% block content %}
+  <h1>Friend Suggestions for {{ profile }}</h1>
+  
+  <div class="container">
+    {% for suggestion in profile.get_friend_suggestions %}
+      
+        
+          <profile>
+            <img src="{{suggestion.profile_image_url}}" alt="" width="150px" height="150px" overflow="hidden">
+            <p><b><a href="{% url 'show_profile' profile.pk %}">{{suggestion.first_name}} {{suggestion.last_name}}</a></b></p>
+            <p><i>City: {{suggestion.city}}</i></p>\<a href="{% url 'add_friend' profile.pk suggestion.pk %}" style="display: inline-block; background-color: #007BFF; color: white; 
+            padding: 10px 15px; border-radius: 5px; text-decoration: none; ">Add Friend</a>
+          </profile>
+         
+      
+    {% empty %}
+      No friend suggestions available at this time.</li>
+    {% endfor %}
+  </div>
+  
+  <!-- Link back to the profile page -->
+  <h2><a href="{% url 'show_profile' pk=object.pk %}">Back to Profile</a></h2>
+{% endblock %}

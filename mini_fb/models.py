@@ -31,7 +31,31 @@ class Profile(models.Model):
       friends.append(friend.profile1)
     
     return friends
+  
+  def add_friend(self, other):
+    '''Method that creates a friend relationship between self and other profile object'''
+    if self == other:
+      return "Error: You cant friend yourself"
+    
+    already_friends = Friend.objects.filter(profile1=self, profile2=other).exists() or Friend.objects.filter(profile1=other, profile2=self).exists()
 
+    if already_friends:
+      return "You are already friends with this person"
+    
+    Friend.objects.create(profile1=self, profile2=other)
+    return f"{other} is now your friend"
+  
+  def get_friend_suggestions(self):
+    """Returns a list of possible friends for a profile"""
+  
+    friends_as_profile1 = Friend.objects.filter(profile1=self).values_list('profile2__pk', flat=True)   
+    friends_as_profile2 = Friend.objects.filter(profile2=self).values_list('profile1__pk', flat=True)
+    
+    friend_ids = set(friends_as_profile1) | set(friends_as_profile2)
+
+    suggestions = Profile.objects.exclude(pk__in=friend_ids).exclude(pk=self.pk)
+
+    return suggestions
   
   def get_absolute_url(self):
     '''Provide a URL after creating a new Profile'''

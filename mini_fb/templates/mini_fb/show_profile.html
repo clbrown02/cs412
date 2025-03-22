@@ -5,6 +5,7 @@
   <nav>
     <h2><a href="{% url 'create_status' profile.pk %}">New Status Message</a></h2>
     <h2><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></h2>
+    <h2><a href="{% url 'friend_suggestions' pk=profile.pk %}">See Friend Suggestions</a></h2>
   </nav>
 </header>
 <table>
@@ -41,7 +42,7 @@
 
 <h2>{{profile.first_name}}'s Friends</h2>
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+<div >
   {% for profile in profile.get_friends %}
     <div style="text-align: center; width: 150px;">
       <img src="{{ profile.profile_image_url }}" alt="" width="150px" height="150px" style="object-fit: cover; border-radius: 10px;">
