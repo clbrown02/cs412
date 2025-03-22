@@ -57,12 +57,19 @@ class Profile(models.Model):
 
     return suggestions
   
+  def get_news_feed(self):
+        '''Returns a QuerySet of status messages from self and friends, ordered by most recent'''
+        friend_profiles = self.get_friends()  
+    
+        news_feed = StatusMessage.objects.filter(profile__in=friend_profiles).order_by('-timestamp')
+        
+        return news_feed
+
   def get_absolute_url(self):
     '''Provide a URL after creating a new Profile'''
     return reverse('show_profile', kwargs={'pk':self.pk})
 
-  
-  
+    
 class StatusMessage(models.Model):
   '''Encapsulates the data of a status message'''
 

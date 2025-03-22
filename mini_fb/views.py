@@ -130,3 +130,15 @@ class ShowFriendSuggestionsView(DetailView):
     '''Shows friend suggestions for a profile'''
     model = Profile
     template_name = "mini_fb/friend_suggestions.html"
+
+
+class ShowNewsFeedView(DetailView):
+    '''View to show a personalized news feed'''
+    model = Profile
+    template_name = "mini_fb/news_feed.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        context["news_feed"] = profile.get_news_feed()
+        return context
