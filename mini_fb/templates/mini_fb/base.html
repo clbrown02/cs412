@@ -10,10 +10,24 @@
 
   <body>
     <header>
-      <h1>Mini Facebook</h1>
+      <h1>Mini Facebook, <br>
+        {% if request.user.is_authenticated %}
+        Logged in as: {{request.user}}
+        {% else %}
+        Not logged in.
+        {% endif %}
+      </h1>
       <div class="topnav">
+        <a class='active' href="{% url 'show_all' %}">Show All Profiles</a>
+        {% if request.user.is_authenticated %}
+        <!-- URLS for logged in users only -->
+
+        {% else %}
+        <!-- URLS for not logged in users -->
             <a class="active" href="{% url 'create_profile' %}">Create A Profile</a>
-            <a class='active' href="{% url 'show_all' %}">Show All Profiles</a>
+        {% endif %}
+
+        
       
       </div>
     </header>

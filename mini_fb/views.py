@@ -3,6 +3,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 class ShowAllProfilesView(ListView):
@@ -19,13 +20,13 @@ class ShowProfilePageView(DetailView):
   template_name = "mini_fb/show_profile.html"
   context_object_name = "profile"
 
-class CreateProfileView(CreateView):
+class CreateProfileView( CreateView):
   '''Define a create class to create a profile'''
 
   form_class = CreateProfileForm
   template_name ='mini_fb/create_profile_form.html'
 
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
   '''Define a create class to create a profile'''
 
   form_class = CreateStatusMessageForm
@@ -69,14 +70,14 @@ class CreateStatusMessageView(CreateView):
     return reverse('show_profile', kwargs={'pk': pk})
   
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
   '''Defines a class that updates a profile'''
 
   model = Profile
   form_class = UpdateProfileForm
   template_name = 'mini_fb/update_profile_form.html'
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
   '''Class to delete a status message'''
   model = StatusMessage
   template_name = "mini_fb/delete_status_form.html"
@@ -92,7 +93,7 @@ class DeleteStatusMessageView(DeleteView):
 
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
   '''Defines a class that updates a statusmessage'''
 
   model = StatusMessage
@@ -109,7 +110,7 @@ class UpdateStatusMessageView(UpdateView):
 
     return reverse('show_profile', kwargs={'pk':profile.pk})
 
-class AddFriendView(View):
+class AddFriendView(LoginRequiredMixin, View):
   '''View to add create a friend relationship between two profile objects'''
   def dispatch(self, request, *args, **kwargs):
     '''Read the URL parameters'''
@@ -126,7 +127,7 @@ class AddFriendView(View):
   
 
 
-class ShowFriendSuggestionsView(DetailView):
+class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     '''Shows friend suggestions for a profile'''
     model = Profile
     template_name = "mini_fb/friend_suggestions.html"

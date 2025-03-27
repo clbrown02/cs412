@@ -3,10 +3,14 @@
 {% block content %}
 <header>
   <nav>
+    {% if request.user.is_authenticated and request.user == profile.user%}
+    <!-- User is already authenticated -->
     <h2><a href="{% url 'create_status' profile.pk %}">New Status Message</a></h2>
     <h2><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></h2>
     <h2><a href="{% url 'friend_suggestions' pk=profile.pk %}">See Friend Suggestions</a></h2>
     <h2><a href="{% url 'show_news_feed' profile.pk %}" class="news-feed-btn">View News Feed</a></h2>
+    {% else %}
+    {% endif %} 
   </nav>
 </header>
 <table>
@@ -31,8 +35,11 @@
 <div class="statusm">
   
 <p class="msg"><b><i>{{status_message.message}}</i> - {{status_message.timestamp}}</b></p>
+{% if request.user.is_authenticated and request.user == profile.user %}
 <button><a href="{% url 'delete_status' status_message.pk %}">Delete</a></button>
 <button><a href="{% url 'update_status_message' status_message.pk %}">Update</a></button>
+{% else %}
+{% endif %}
 {% for img in status_message.get_images %}
 <img src="{{img.image.image_file.url}}" alt="{{img.image.url}}">
 {% endfor %}
@@ -44,10 +51,10 @@
 <h2>{{profile.first_name}}'s Friends</h2>
 
 <div >
-  {% for profile in profile.get_friends %}
+  {% for friend_profile in profile.get_friends %}
     <div style="text-align: center; width: 150px;">
-      <img src="{{ profile.profile_image_url }}" alt="" width="150px" height="150px" style="object-fit: cover; border-radius: 10px;">
-      <p><b><a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a></b></p>
+      <img src="{{ friend_profile.profile_image_url }}" alt="" width="150px" height="150px" style="object-fit: cover; border-radius: 10px;">
+      <p><b><a href="{% url 'show_profile' friend_profile.pk %}">{{ friend_profile.first_name }} {{ friend_profile.last_name }}</a></b></p>
       
     </div>
   {% endfor %}
