@@ -20,6 +20,10 @@ class ShowProfilePageView(DetailView):
   template_name = "mini_fb/show_profile.html"
   context_object_name = "profile"
 
+  def get_object(self):
+    '''Method to locate the user'''
+    return get_object_or_404(Profile, user=self.request.user)
+
 class CreateProfileView( CreateView):
   '''Define a create class to create a profile'''
 
@@ -77,6 +81,10 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
   form_class = UpdateProfileForm
   template_name = 'mini_fb/update_profile_form.html'
 
+  def get_object(self):
+    """Retrieve the Profile of the currently logged-in user"""
+    return get_object_or_404(Profile, user=self.request.user)
+
 class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
   '''Class to delete a status message'''
   model = StatusMessage
@@ -132,11 +140,18 @@ class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "mini_fb/friend_suggestions.html"
 
+    def get_object(self):
+      """Retrieve the Profile of the currently logged-in user"""
+      return get_object_or_404(Profile, user=self.request.user)
 
 class ShowNewsFeedView(DetailView):
     '''View to show a personalized news feed'''
     model = Profile
     template_name = "mini_fb/news_feed.html"
+
+    def get_object(self):
+        """Retrieve the Profile of the currently logged-in user"""
+        return get_object_or_404(Profile, user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

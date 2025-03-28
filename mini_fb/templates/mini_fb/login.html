@@ -1,0 +1,22 @@
+<!-- mini_fb/login.html -->
+ {% extends 'mini_fb/base.html' %}
+ {% block content %}
+
+  <h1>Login to Mini Facebook!</h1>
+  <form action="{% url 'mini_fb_login' %}" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Login">
+
+    
+    
+    
+    <input type="hidden" name="next" value="{% url 'show_all'  %}">
+    
+  </form>
+
+  <hr>
+  
+  <h2>Don't have an account?<a href="{% url 'create_profile' %}"> <br>Create a Profile!</h2></a>
+
+ {% endblock %}

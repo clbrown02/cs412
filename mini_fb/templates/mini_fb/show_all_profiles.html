@@ -2,20 +2,30 @@
 {% load static %}
 
 {% block content %}
-<h2>Showing all Profiles</h1>
+<h2>Showing all Profiles</h2>
 
 <div class="container">
-  
-{% for profile in profiles %}
-<profile>
-  <img src="{{profile.profile_image_url}}" alt="" width="150px" height="150px" overflow="hidden">
-  <p><b><a href="{% url 'show_profile' profile.pk %}">{{profile.first_name}} {{profile.last_name}}</a></b></p>
-  <p><i>City: {{profile.city}}</i></p>
-</profile>
-  
-{% endfor %}
+  {% if request.user.is_authenticated %}
+    {# Show only the logged-in user's profile #}
+    {% for profile in profiles %}
+      {% if request.user == profile.user %}
+        <profile>
+          <img src="{{ profile.profile_image_url }}" alt="" width="150px" height="150px" style="object-fit: cover;">
+          <p><b><a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a></b></p>
+          <p><i>City: {{ profile.city }}</i></p>
+        </profile>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {# Show all profiles if no one is logged in #}
+    {% for profile in profiles %}
+      <profile>
+        <img src="{{ profile.profile_image_url }}" alt="" width="150px" height="150px" style="object-fit: cover;">
+        <p><b>{{ profile.first_name }} {{ profile.last_name }}</b></p>
+        <p><i>City: {{ profile.city }}</i></p>
+      </profile>
+    {% endfor %}
+  {% endif %}
 </div>
-
-
 
 {% endblock %}

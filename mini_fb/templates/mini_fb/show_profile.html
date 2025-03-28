@@ -5,10 +5,10 @@
   <nav>
     {% if request.user.is_authenticated and request.user == profile.user%}
     <!-- User is already authenticated -->
-    <h2><a href="{% url 'create_status' profile.pk %}">New Status Message</a></h2>
-    <h2><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></h2>
-    <h2><a href="{% url 'friend_suggestions' pk=profile.pk %}">See Friend Suggestions</a></h2>
-    <h2><a href="{% url 'show_news_feed' profile.pk %}" class="news-feed-btn">View News Feed</a></h2>
+    <h2><a href="{% url 'create_status'  %}">New Status Message</a></h2>
+    <h2><a href="{% url 'update_profile'  %}">Update Profile</a></h2>
+    <h2><a href="{% url 'friend_suggestions'  %}">See Friend Suggestions</a></h2>
+    <h2><a href="{% url 'show_news_feed'  %}" class="news-feed-btn">View News Feed</a></h2>
     {% else %}
     {% endif %} 
   </nav>
