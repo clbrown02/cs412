@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Voter(models.Model):
@@ -33,7 +34,7 @@ def load_data():
   '''Function to load the voter data into the django database'''
 
    # very dangerous line
-  
+  Voter.objects.all().delete()
   filename = r"C:\Users\chris\Desktop\software\newton_voters.csv"
   f = open(filename, 'r')
   f.readline()
@@ -42,6 +43,9 @@ def load_data():
     fields = line.split(',')
 
     try:
+
+      
+
       result = Voter(
           last_name = fields[1],
           first_name = fields[2],

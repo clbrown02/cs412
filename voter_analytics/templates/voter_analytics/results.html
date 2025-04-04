@@ -1,0 +1,65 @@
+<!-- voter_analytics/templates/voter_analytics/results.html -->
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% include "voter_analytics/search.html" %}
+  </div>
+	<h1>Results</h1>
+    <!-- navigation links for different pages of results -->
+    <div class="row">
+      {% if is_paginated %}
+      <ul class="pagination">
+          {% if page_obj.has_previous %}
+              <li>
+                  <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+              
+              </li>
+          {% endif %}
+              <li class="">
+                  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+              </li>
+          {% if page_obj.has_next %}
+              <li>
+                  <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+              </li>
+          {% endif %}
+          </ul>
+      {% endif %}
+  </div>
+
+    <div class="row">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Street address</th>
+                <th>Date of birth</th>
+                <th>Party affiliation</th>
+                <th>Voter Score</th>
+                <th>Details</th>
+            </tr>
+    
+            {% for r in results %}
+            <tr>
+                <td>{{r.first_name}} {{r.last_name}}</td>
+                {% if r.address_apt_number %}
+                <td>{{r.address_street_name}}, {{r.address_apt_number}}</td>
+                {% else %}
+                <td>{{r.address_street_name}}, {{r.address_street_number}}</td>
+                {% endif %}
+                <td>{{r.dob}}</td>
+                <td>{{r.party}}</td>
+                <td>{{r.voter_score}}</td>
+                <td></td>
+                <td><a href="{% url 'voter' r.pk %}">View More</a></td>
+             
+            </tr>
+            {% endfor %}
+    
+        </table>
+
+        </div>
+    </div>
+    
+{% endblock %}

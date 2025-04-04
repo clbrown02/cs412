@@ -1,0 +1,37 @@
+<!-- voter_analytics/templates/voter_analytics/voter_detail.html -->
+ {% extends 'voter_analytics/base.html' %}
+
+ {% block content %}
+  <div>
+    <h1>{{ voter.first_name }} {{ voter.last_name }}</h1>
+  <p><strong>Address:</strong> {{ voter.address_street_number }} {{ voter.address_street_name }}{% if voter.address_apt_number %}, Apt {{ voter.address_apt_number }}{% endif %}, Zip: {{ voter.zip_code }}</p>
+  <p><strong>Date of Birth:</strong> {{ voter.dob }}</p>
+  <p><strong>Registration Date:</strong> {{ voter.reg_date }}</p>
+  <p><strong>Party:</strong> {{ voter.party }}</p>
+  <p><strong>Precinct Number:</strong> {{ voter.precint_number }}</p>
+  <p><strong>Voter Score:</strong> {{ voter.voter_score }}</p>
+  <hr>
+  <h2>Voting History</h2>
+  <ul>
+    <li><strong>V20:</strong> {{ voter.v20 }}</li>
+    <li><strong>V21:</strong> {{ voter.v21_t }}</li>
+    <li><strong>V21:</strong> {{ voter.v21_p }}</li>
+    <li><strong>V22:</strong> {{ voter.v22 }}</li>
+    <li><strong>V23:</strong> {{ voter.v23 }}</li>
+  </ul>
+  
+  <!-- Construct a Google Maps link -->
+  {% with full_address=voter.address_street_number|stringformat:"s"|add:" "|add:voter.address_street_name|stringformat:"s"|add:" "|add:voter.zip_code|stringformat:"s" %}
+  <p>
+    <a href="https://www.google.com/maps/search/?api=1&query={{ full_address|urlencode }}" target="_blank">
+      View on Google Maps
+    </a>
+  </p>
+{% endwith %}
+
+  
+  <p><a href="{% url 'voter_results_list' %}">Back to Voter List</a></p>
+  </div>
+
+
+{% endblock %}

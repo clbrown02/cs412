@@ -1,0 +1,74 @@
+<!-- voter_analytics/templates/mvoter_analytics/search.html -->
+<h1>Search Form</h1>
+
+<table>
+<form action="{% url 'voter_results_list' %}">
+
+    <tr>
+        <th><label for="party">Party affiliation:</label></th>
+        <td><input list="affiliations" name="party" id="party"></td>
+        <datalist id="affiliations">
+          <option value="U "></option>
+          <option value="D "></option>
+          <option value="R "></option>
+          <option value="CC"></option>
+        </datalist>
+
+        <th><label for="score">Voter score:</label></th>
+        <td><input list="score" name="score" id="score"></td>
+        <datalist id="score">
+          <option value="0"></option>
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
+          <option value="4"></option>
+        </datalist>
+        
+        <label for="min_dob">Min Year of Birth:</label>
+        <select name="min_dob" id="min_dob">
+          <option value="">-- Any --</option>
+          {% for year in years %}
+            <option value="{{year}}">{{ year }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="max_dob">Max Year of Birth:</label>
+        <select name="max_dob" id="max_dob">
+          <option value="">-- Any --</option>
+          {% for year in years %}
+            <option value="{{year}}">{{ year }}</option>
+          {% endfor %}
+        </select>
+
+        <fieldset>
+          <legend>Elections</legend>
+          <input type="checkbox" id="v20" name="v20" value="True"
+                 {% if request.GET.v20 %}checked{% endif %}>
+          <label for="v20">Election v20</label>
+      
+          <input type="checkbox" id="v21_t" name="v21_t" value="True"
+                 {% if request.GET.v21_t %}checked{% endif %}>
+          <label for="v21_t">Election v21</label>
+      
+          <input type="checkbox" id="v21_p" name="v21_p" value="True"
+                 {% if request.GET.v21_p %}checked{% endif %}>
+          <label for="v21_p">Election v21</label>
+      
+          <input type="checkbox" id="v22" name="v22" value="True"
+                 {% if request.GET.v22 %}checked{% endif %}>
+          <label for="v22">Election v22</label>
+      
+          <input type="checkbox" id="v23" name="v23" value="True"
+                 {% if request.GET.v23 %}checked{% endif %}>
+          <label for="v23">Election v23</label>
+        </fieldset>
+
+    </tr>
+    
+    <tr>
+        <td><input type="submit"></td>
+        <td></td>
+    </tr>
+    
+</form>
+</table>
