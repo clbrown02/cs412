@@ -1,0 +1,23 @@
+<!-- food_rush/templates/food_rush/show_restaurant.html
+ html page to show an individual restaurant -->
+
+{% extends 'food_rush/base.html' %}
+
+{% block content %}
+<h2>{{restaurant.name}}</h2>
+<ul>
+  {% for f in foods %}
+  <li>
+  <form action="">
+    {{f.name}} - ${{f.price}}
+    {% csrf_token %}
+    <input type="hidden" name="food_id" value="{{ f.pk }}">
+    <input type="amt" name="qty" value="1" min="1">
+    <button>Add to cart</button>
+  </form>
+  </li>
+  {%  endfor %}
+
+</ul>
+
+{% endblock %}

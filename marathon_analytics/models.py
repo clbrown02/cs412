@@ -38,64 +38,64 @@ class Result(models.Model):
         '''Return a string representation of this model instance.'''
         return f'{self.first_name} {self.last_name} ({self.city}, {self.state}), {self.time_finish}'
 
-def load_data():
-    '''Function to load data reecords from CSV file into the Django database'''
+# def load_data():
+#     '''Function to load data reecords from CSV file into the Django database'''
 
-    # very dangerous line
-    Result.objects.all().delete()
-    filename = r"C:\Users\chris\Desktop\software\newton_voters.csv"
-    f = open(filename, 'r')
+#     # very dangerous line
+#     Result.objects.all().delete()
+#     filename = r"C:\Users\chris\Desktop\software\newton_voters.csv"
+#     f = open(filename, 'r')
 
-    f.readline()
+#     f.readline()
 
-    for line in f:
+#     for line in f:
       
-        try:
-          fields = line.strip().split(',')
-          # print(fields)
-          # for j in range(len(fields)):
-          #     print(f'fields[{j}] = {fields[j]}')
-          #  fields[0] = 6
-          # fields[1] = Seifu
-          # fields[2] = Tura Abdiwak
-          # fields[3] = ETH
-          # fields[4] = Addis Abeba
-          # fields[5] = Addis Abeba
-          # fields[6] = Male
-          # fields[7] = 25-29
-          # fields[8] = 5
-          # fields[9] = 5
-          # fields[10] = 2
-          # fields[11] = 7:30:02
-          # fields[12] = 9:35:31
-          # fields[13] = 2:05:29
-          # fields[14] = 1:02:21
-          # fields[15] = 1:03:08
-          result = Result(bib=fields[0],
-                            first_name=fields[1],
-                            last_name=fields[2],
-                            ctz = fields[3],
-                            city = fields[4],
-                            state = fields[5],
+#         try:
+#           fields = line.strip().split(',')
+#           # print(fields)
+#           # for j in range(len(fields)):
+#           #     print(f'fields[{j}] = {fields[j]}')
+#           #  fields[0] = 6
+#           # fields[1] = Seifu
+#           # fields[2] = Tura Abdiwak
+#           # fields[3] = ETH
+#           # fields[4] = Addis Abeba
+#           # fields[5] = Addis Abeba
+#           # fields[6] = Male
+#           # fields[7] = 25-29
+#           # fields[8] = 5
+#           # fields[9] = 5
+#           # fields[10] = 2
+#           # fields[11] = 7:30:02
+#           # fields[12] = 9:35:31
+#           # fields[13] = 2:05:29
+#           # fields[14] = 1:02:21
+#           # fields[15] = 1:03:08
+#           result = Result(bib=fields[0],
+#                             first_name=fields[1],
+#                             last_name=fields[2],
+#                             ctz = fields[3],
+#                             city = fields[4],
+#                             state = fields[5],
                             
-                            gender = fields[6],
-                            division = fields[7],
+#                             gender = fields[6],
+#                             division = fields[7],
 
-                            place_overall = fields[8],
-                            place_gender = fields[9],
-                            place_division = fields[10],
+#                             place_overall = fields[8],
+#                             place_gender = fields[9],
+#                             place_division = fields[10],
                         
-                            start_time_of_day = fields[11],
-                            finish_time_of_day = fields[12],
-                            time_finish = fields[13],
-                            time_half1 = fields[14],
-                            time_half2 = fields[15],
-                        )
-          result.save()
-         # print(f'Created result: {result}')
+#                             start_time_of_day = fields[11],
+#                             finish_time_of_day = fields[12],
+#                             time_finish = fields[13],
+#                             time_half1 = fields[14],
+#                             time_half2 = fields[15],
+#                         )
+#           result.save()
+#          # print(f'Created result: {result}')
       
-        except:
-            print("Something went wrong")
-            print(f"line={line}")
+#         except:
+#             print("Something went wrong")
+#             print(f"line={line}")
 
-    print(f"Created:  {len(Result.objects.all())} Results")
+#     print(f"Created:  {len(Result.objects.all())} Results")

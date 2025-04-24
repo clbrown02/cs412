@@ -10,7 +10,7 @@
           <profile>
             <img src="{{suggestion.profile_image_url}}" alt="" width="150px" height="150px" overflow="hidden">
             <p><b><a href="{% url 'show_profile' profile.pk %}">{{suggestion.first_name}} {{suggestion.last_name}}</a></b></p>
-            <p><i>City: {{suggestion.city}}</i></p>\<a href="{% url 'add_friend' profile.pk suggestion.pk %}" style="display: inline-block; background-color: #007BFF; color: white; 
+            <p><i>City: {{suggestion.city}}</i></p>\<a href="{% url 'add_friend'  suggestion.pk %}" style="display: inline-block; background-color: #007BFF; color: white; 
             padding: 10px 15px; border-radius: 5px; text-decoration: none; ">Add Friend</a>
           </profile>
          
