@@ -8,7 +8,7 @@
 <ul>
   {% for f in foods %}
   <li>
-  <form action="">
+  <form method="post" action="{% url 'cart_add' %}">
     {{f.name}} - ${{f.price}}
     {% csrf_token %}
     <input type="hidden" name="food_id" value="{{ f.pk }}">
@@ -19,5 +19,6 @@
   {%  endfor %}
 
 </ul>
+<a href="{% url 'cart_view' %}">View cart</a>
 
 {% endblock %}

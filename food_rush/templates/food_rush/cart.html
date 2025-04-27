@@ -1,0 +1,25 @@
+<!-- food_rush/templates/food_rush/cart.html
+ page that holds the order data -->
+
+{% extends 'food_rush/base.html' %}
+
+{% block content %}
+<h2>Your cart</h2>
+{% if items %}
+  <ul>
+    {% for line in items %}
+      <li>{{ line.qty }} × {{ line.food.name }} — ${{ line.subtotal }}</li>
+    {% endfor %}
+  </ul>
+  <p>Total: ${{ total }}</p>
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <button type="submit">Checkout</button>
+  </form>
+
+{% else %}
+  <p>Cart is empty.</p>
+{% endif %}
+
+{% endblock %}
+

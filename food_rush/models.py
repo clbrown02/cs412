@@ -5,6 +5,8 @@ import random
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.conf import settings
 
 class Customer(models.Model):
   '''Encapsulates the idea of a Customer model'''
@@ -14,6 +16,11 @@ class Customer(models.Model):
   last_name = models.TextField(blank=False)
   email = models.EmailField(blank=True)
   phone_number = models.CharField(max_length=12)
+  user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="customer",   # singular
+    )
 
   def __str__(self):
     '''Return a string represenation of this Customer object'''
@@ -50,9 +57,13 @@ class Food_selection(models.Model):
   '''Encapsulates the idea of a food selection model'''
 
   #data attributes of a food item
-  order = models.ForeignKey('Order', on_delete=models.CASCADE)
+  order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name="selections")
   item = models.ForeignKey(Food_item, on_delete=models.PROTECT)
   quantity = models.PositiveIntegerField(default=1)
+  price_at_order = models.DecimalField(max_digits=7, decimal_places=2)
+
+  def line_total(self):
+     return self.quantity * self.price_at_order
 
   def __str__(self):
     '''Returns a string representation of this Food_selection object'''
