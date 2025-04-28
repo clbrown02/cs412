@@ -12,13 +12,13 @@
     {{f.name}} - ${{f.price}}
     {% csrf_token %}
     <input type="hidden" name="food_id" value="{{ f.pk }}">
-    <input type="amt" name="qty" value="1" min="1">
+    <input type="number" name="qty" value="1" min="1">
     <button>Add to cart</button>
   </form>
   </li>
   {%  endfor %}
 
 </ul>
-<a href="{% url 'cart_view' %}">View cart</a>
+<a href="{% url 'cart_view' %}" class="button">View cart</a>
 
 {% endblock %}
