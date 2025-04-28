@@ -1,0 +1,12 @@
+<!-- food_rush/templates/food_rush/logged_out.html
+ page that shows to users once they log out -->
+{% extends 'food_rush/base.html' %}
+
+{% block content %}
+
+<h2>Logout page</h2>
+<h3>You've been logged out</h3>
+<br>
+<a href="{% url 'food_rush_login' %}">Click here to log in again</a>
+</h2>
+{% endblock %}

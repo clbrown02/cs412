@@ -57,24 +57,3 @@
 {% endblock %}
 
 
-{% block extra_js %}
-{% if order.seconds_remaining %}
-<script>
-(function () {
-  const span = document.getElementById("count");
-  let secs   = parseInt(span.dataset.secs, 10);
-  const fmt  = s => {
-    const m = String(Math.floor(s/60)).padStart(2,"0");
-    const x = String(s%60).padStart(2,"0");
-    return `${m}:${x}`;
-  };
-  const tick = () => {
-    if (secs <= 0) { span.textContent = "Delivered"; return; }
-    span.textContent = fmt(secs--);
-    setTimeout(tick, 1_000);
-  };
-  tick();
-})();
-</script>
-{% endif %}
-{% endblock %}

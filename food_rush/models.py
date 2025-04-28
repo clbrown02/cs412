@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.urls import reverse
 
 class Customer(models.Model):
   '''Encapsulates the idea of a Customer model'''
@@ -25,6 +26,10 @@ class Customer(models.Model):
   def __str__(self):
     '''Return a string represenation of this Customer object'''
     return f'{self.first_name}  {self.last_name}'
+  
+  def get_absolute_url(self):
+     '''Provide a URL after creating a new customer'''
+     return reverse('show_restaurants')
 
 class Restaurant(models.Model):
   '''Encapsulates the idea of a Restaurant model'''

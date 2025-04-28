@@ -17,6 +17,12 @@
     <button type="submit">Checkout</button>
   </form>
 
+  <!-- empty cart -->
+   <form method="post" action="{% url 'cart_clear' %}" style="margin-top:8px;">
+    {% csrf_token %}
+    <button type="submit">Empty cart</button>
+</form>
+
 {% else %}
   <p>Cart is empty.</p>
 {% endif %}

@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+from .forms import *
 # Create your views here.
 
 
@@ -168,3 +169,37 @@ class OrderDetailView(DetailView):
      ctx = super().get_context_data(**kwargs)
      ctx["total"] = sum(sel.line_total() for sel in self.object.selections.all())
      return ctx
+  
+class CreateProfileView(CreateView):
+   '''Define a create class to create a profile'''
+
+   form_class = CreateCustomerForm
+   template_name = 'food_rush/create_customer_form.html'
+
+   def get_context_data(self, **kwargs):
+      '''Method that provides variables to the context'''
+      context = super().get_context_data(**kwargs)
+
+      if 'user_form' not in context:
+         context['user_form'] = UserCreationForm()
+      return context
+   
+   def form_valid(self,form):
+      '''Method to check that the form is valid'''
+      user_form = UserCreationForm(self.request.POST)
+      if user_form.is_valid():
+         
+         user = user_form.save()
+         login(self.request, user)
+         form.instance.user = user
+
+         return super().form_valid(form)
+      else:
+         return self.form_invalid(form)
+      
+@require_POST
+def clear_cart(request):
+   '''Remove the items from the cart and redirect the user back to the cart page'''
+   request.session.pop("cart", None)
+   messages.success(request, "Your cart has been emptied")
+   return redirect(reverse("cart_view"))
