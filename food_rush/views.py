@@ -69,6 +69,8 @@ class CartView(TemplateView):
    def get_context_data(self, **kwargs):
       ctx = super().get_context_data(**kwargs)
       cart = self.request.session.get("cart", {})
+      rest_id = cart.get("restaurant_id")
+      ctx["current_restaurant"] = Restaurant.objects.filter(pk=rest_id).first()
       items, total = [], 0
       for fid, qty in cart.get("items", {}).items():
          food = get_object_or_404(Food_item, pk=int(fid))
@@ -203,3 +205,23 @@ def clear_cart(request):
    request.session.pop("cart", None)
    messages.success(request, "Your cart has been emptied")
    return redirect(reverse("cart_view"))
+
+class ShowOrderHistoryView(DetailView):
+   '''View to show a customers order'''
+   model = Customer
+   template_name = "food_rush/order_history.html"
+
+   def get_object(self):
+      '''Retrieve the Customer of the currently logged-in user'''
+      return get_object_or_404(Customer, user=self.request.user)
+   
+   def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    customer = self.request.user.customer
+    orders = customer.get_order_history()
+
+  
+
+    context["customer"] = customer
+    context["orders"] = orders
+    return context

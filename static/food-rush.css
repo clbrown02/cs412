@@ -120,3 +120,161 @@ restaurant:hover {
 restaurant img:hover {
   transform: scale(1.05);
 }
+
+button, input[type="submit"] {
+  background-color: #8B1E3F; /* or your brand color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+
+/* === Form Wrapper === */
+.form-wrapper {
+  max-width: 500px;
+  margin: 0 auto; /* Center the form horizontally */
+  background: #fff8e1; /* Light background to make the form stand out */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Form Group Layout === */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Labels === */
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #5a5a5a;
+}
+
+/* === Input Fields === */
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* === Submit Button (already covered, but you can refine if needed) === */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #8c2525;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #df7149;
+}
+
+/* === Error Messages === */
+.form-errors {
+  background-color: #ffe6e6;
+  border: 1px solid #ffb3b3;
+  color: #a10000;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* General form styling */
+form.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff8dc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Make table form inputs more compact and clean */
+form.form-container table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+form.form-container input[type="text"],
+form.form-container input[type="password"],
+form.form-container input[type="email"],
+form.form-container input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+/* Headings consistent with the profile page */
+h2 {
+  color: #8c2525;
+  margin-bottom: 15px;
+}
+
+/* Styled link that looks like a button */
+.button-link {
+  display: inline-block;
+  background-color: #8B1E3F;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+  background-color: #A63A4F;
+}
+
+
+/* Navbar styling */
+.navbar {
+  background-color: #8b1e3f00;
+  padding: 15px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Adjusted spacing between links */
+  margin: 0;
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  color: rgb(0, 0, 0); /* White text */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px; /* Increased padding for better button feel */
+  border-radius: 6px;
+  background-color: transparent; /* No background color */
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #d4d49f00; /* Hover color */
+  color: #8B1E3F; /* Darker color for the text on hover */
+}

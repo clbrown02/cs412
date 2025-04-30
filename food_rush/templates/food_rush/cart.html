@@ -27,5 +27,15 @@
   <p>Cart is empty.</p>
 {% endif %}
 
+{% if current_restaurant %}
+  <a href="{% url 'show_restaurant' current_restaurant.pk %}" class="btn">
+      ← Back to {{ current_restaurant.name }}
+  </a>
+{% else %}
+  <a href="{% url 'show_restaurants' %}" class="btn">
+      ← Continue browsing
+  </a>
+{% endif %}
+
 {% endblock %}
 

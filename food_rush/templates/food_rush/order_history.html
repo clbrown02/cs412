@@ -1,0 +1,31 @@
+<!-- food_rush/templates/food_rush/order_history.html
+ html pages that lists out the customer's order history -->
+
+{% extends 'food_rush/base.html' %}
+
+
+{% block content %}
+
+<h2>Here's your past orders, {{customer.first_name}}</h2>
+
+<div>
+  {% for order in customer.get_order_history %}
+  <p>{{order.pk}} | {{order.order_date}}</p>
+  <ul>
+  {% for sel in order.selections.all %}
+    <li>{{sel.quantity}} x {{sel.item.name}}
+      (each&nbsp;${{ sel.price_at_order }})  —&nbsp;
+              ${{ sel.line_total }}
+    </li>
+
+  {% endfor %}
+  </ul>
+  <p>
+    <strong>Total:</strong>
+    ${{ order.total|floatformat:2}}
+  </p>
+ <hr>
+  {% endfor %}
+</div>
+
+{% endblock %}

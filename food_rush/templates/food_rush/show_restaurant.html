@@ -9,7 +9,9 @@
   {% for f in foods %}
   <li>
   <form method="post" action="{% url 'cart_add' %}">
-    {{f.name}} - ${{f.price}}
+    {{f.name}} - ${{f.price}} <br>
+    <i>{{f.description}}</i>
+    <hr>
     {% csrf_token %}
     <input type="hidden" name="food_id" value="{{ f.pk }}">
     <input type="number" name="qty" value="1" min="1">

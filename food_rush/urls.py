@@ -14,6 +14,7 @@ urlpatterns = [
   path("orders/<int:pk>/", OrderDetailView.as_view(), name="order_detail" ),
   path('create_customer/', CreateProfileView.as_view(), name='create_customer'),
   path('login', auth_views.LoginView.as_view(template_name='food_rush/login.html'), name='food_rush_login' ),
-  path('logout/', auth_views.LogoutView.as_view(template_name='food_rush/food_rush_logged_out.html', next_page='food_rush_logged_out.html'), name='food_rush_logout')
+  path('logout/', auth_views.LogoutView.as_view(template_name='food_rush/food_rush_logged_out.html', next_page='food_rush_logged_out.html'), name='food_rush_logout'),
+  path('order_history/', ShowOrderHistoryView.as_view(), name="order_history"),
 ]
 

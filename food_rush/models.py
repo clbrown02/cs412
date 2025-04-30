@@ -27,6 +27,14 @@ class Customer(models.Model):
     '''Return a string represenation of this Customer object'''
     return f'{self.first_name}  {self.last_name}'
   
+  def get_order_history(self):
+     '''Return a Queryset of past orders associated with this Customer object'''
+     orders = []
+     for order in Order.objects.filter(customer=self):
+        orders.append(order)
+    
+     return orders
+  
   def get_absolute_url(self):
      '''Provide a URL after creating a new customer'''
      return reverse('show_restaurants')
@@ -112,6 +120,11 @@ class Order(models.Model):
   def __str__(self):
     '''Returns a string representation of this order object'''
     return f'Order #{self.id} - {self.customer}'
+  
+  @property
+  def total(self):
+     '''Returns the toal cost of the order'''
+     return sum(sel.line_total() for sel in self.selections.all())
   
 
 

@@ -1,23 +1,30 @@
 <!-- food_rush/login.html 
  html form to login in to the food_rush app-->
-{% extends 'food_rush/base.html' %}
-{% block content %}
-
- <h2>Login to Food Rush!</h2>
- <form action="{% url 'food_rush_login' %}" method="POST">
-   {% csrf_token %}
-   {{form}}
-   <input type="submit" value="Login">
-
-   
-   
-   
-   <input type="hidden" name="next" value="{% url 'show_restaurants'  %}">
-   
- </form>
-
- <hr>
+ {% extends 'food_rush/base.html' %}
+ {% block content %}
  
- <h2>Don't have an account?<a href="{% url 'create_customer' %}"> <br>Create an account!</h2></a>
-
-{% endblock %}
+  <h2>Login to Food Rush!</h2>
+ 
+  <form action="{% url 'food_rush_login' %}" method="POST" class="form-container">
+    {% csrf_token %}
+    <table>
+     {{form.as_table}} 
+     <!-- added form as table -->
+    </table>
+    <!-- {{form}} -->
+    <input type="submit" value="Login">
+ 
+ 
+ 
+ 
+    <input type="hidden" name="next" value="{% url 'show_restaurants'  %}">
+ 
+  </form>
+ 
+  <hr>
+  
+  <!-- added button link class -->
+  <h2>Don't have an account?</h2>
+ <a href="{% url 'create_customer' %}" class="button-link">Create an account!</a>
+ 
+ {% endblock %}
