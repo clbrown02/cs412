@@ -1,41 +1,42 @@
 <!-- food_rush/templates/food_rush/cart.html
  page that holds the order data -->
 
-{% extends 'food_rush/base.html' %}
+ {% extends 'food_rush/base.html' %}
 
-{% block content %}
-<h2>Your cart</h2>
-{% if items %}
-  <ul>
-    {% for line in items %}
-      <li>{{ line.qty }} × {{ line.food.name }} — ${{ line.subtotal }}</li>
-    {% endfor %}
-  </ul>
-  <p>Total: ${{ total }}</p>
-  <form method="post" action="{% url 'checkout' %}">
-    {% csrf_token %}
-    <button type="submit">Checkout</button>
-  </form>
-
-  <!-- empty cart -->
-   <form method="post" action="{% url 'cart_clear' %}" style="margin-top:8px;">
-    {% csrf_token %}
-    <button type="submit">Empty cart</button>
-</form>
-
-{% else %}
-  <p>Cart is empty.</p>
-{% endif %}
-
-{% if current_restaurant %}
-  <a href="{% url 'show_restaurant' current_restaurant.pk %}" class="btn">
-      ← Back to {{ current_restaurant.name }}
-  </a>
-{% else %}
-  <a href="{% url 'show_restaurants' %}" class="btn">
-      ← Continue browsing
-  </a>
-{% endif %}
-
-{% endblock %}
-
+ {% block content %}
+ <h2>Your cart</h2>
+ {% if items %}
+   <ul>
+     {% for line in items %}
+       <li>{{ line.qty }} × {{ line.food.name }} — ${{ line.subtotal }}</li>
+     {% endfor %}
+   </ul>
+   <p>Total: ${{ total }}</p>
+   <form method="post" action="{% url 'checkout' %}">
+     {% csrf_token %}
+     <button type="submit">Checkout</button>
+   </form>
+ 
+   <!-- empty cart -->
+    <form method="post" action="{% url 'cart_clear' %}" style="margin-top:8px;">
+     {% csrf_token %}
+     <button type="submit">Empty cart</button>
+ </form>
+ 
+ {% else %}
+   <p>Cart is empty.</p>
+ {% endif %}
+ 
+ {% if current_restaurant %}
+   <!-- changed class name -->
+   <a href="{% url 'show_restaurant' current_restaurant.pk %}" class="button-link">
+       ← Back to {{ current_restaurant.name }}
+   </a>
+ {% else %}
+   <!-- changed class name -->
+   <a href="{% url 'show_restaurants' %}" class="button-link">
+       ← Continue browsing
+   </a>
+ {% endif %}
+ 
+ {% endblock %}

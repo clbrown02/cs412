@@ -279,3 +279,39 @@ h2 {
   color: #8B1E3F; /* Darker color for the text on hover */
 }
 
+.food-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.food-image {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.food-details {
+  flex-grow: 1;
+}
+
+.food-details p {
+  margin: 5px 0;
+}
+
+.food-details form {
+  margin-top: 10px;
+}
+
+.food-details i {
+  font-style: italic;
+  font-weight: normal; /* removes bold */
+  font-size: 0.9rem;    /* slightly smaller */
+  color: #555;          /* optional: a softer color */
+}

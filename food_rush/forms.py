@@ -9,5 +9,5 @@ class CreateCustomerForm(forms.ModelForm):
   class Meta:
     '''Associate this form with a model in our database'''
     model = Customer
-    fields = ['first_name', 'last_name', 'email', 'phone_number']
+    fields = ['first_name', 'last_name', 'email', 'phone_number', 'address']
     

@@ -15,6 +15,7 @@ class Customer(models.Model):
   # data attributes of a customer
   first_name = models.TextField(blank=False)
   last_name = models.TextField(blank=False)
+  address = models.TextField(blank=False)
   email = models.EmailField(blank=True)
   phone_number = models.CharField(max_length=12)
   user = models.OneToOneField(
@@ -32,6 +33,8 @@ class Customer(models.Model):
      orders = []
      for order in Order.objects.filter(customer=self):
         orders.append(order)
+    
+     orders.reverse()
     
      return orders
   

@@ -6,32 +6,27 @@
 {% load static %}
 
 {% block content %}
-  <h2>Order #{{ order.pk }}</h2>
+  <h2>Order #{{ order.pk }} confirmed !</h2>
 
   <p>
     <strong>Placed:</strong>
     {{ order.order_date|localtime|date:"Y-m-d H:i" }}
   </p>
 
-  <p>
-    <strong>Status:</strong>
-    {{ order.get_status_display }}   {# "Confirmed" #}
-  </p>
+  
 
   <p>
     <strong>ETA:</strong>
     {{ order.eta|localtime|date:"H:i" }}
 
-    {# Optional live countdown – include ONLY if you want it #}
-    {% if order.seconds_remaining %}
-      &nbsp;(<span id="count" data-secs="{{ order.seconds_remaining }}"></span>)
-    {% endif %}
+    
   </p>
 
   <hr>
 
-  <h3>{{ order.restaurant.name }}</h3>
-  <p>{{ order.restaurant.address }}</p>
+  <h3>From:{{ order.restaurant.name }}</h3>
+  <h3>To: {{order.customer}}</h3>
+  <p>Deliver to: {{ order.customer.address }}</p>
 
   <table>
     <thead>

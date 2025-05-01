@@ -1,27 +1,29 @@
 <!-- food_rush/templates/food_rush/show_restaurant.html
  html page to show an individual restaurant -->
 
-{% extends 'food_rush/base.html' %}
+ {% extends 'food_rush/base.html' %}
 
-{% block content %}
-<h2>{{restaurant.name}}</h2>
-<ul>
-  {% for f in foods %}
-  <li>
-  <form method="post" action="{% url 'cart_add' %}">
-    <img src="{{f.food_photo.url}}" > <br>
-    {{f.name}} - ${{f.price}} <br>
-    <i>{{f.description}}</i>
-    <hr>
-    {% csrf_token %}
-    <input type="hidden" name="food_id" value="{{ f.pk }}">
-    <input type="number" name="qty" value="1" min="1">
-    <button>Add to cart</button>
-  </form>
-  </li>
-  {%  endfor %}
-
-</ul>
-<a href="{% url 'cart_view' %}" class="button">View cart</a>
-
-{% endblock %}
+ {% block content %}
+ <h2>{{restaurant.name}}</h2>
+ <ul>
+   {% for f in foods %}
+ 
+   <!-- added div and class -->
+   <div class="food-item">
+     <img src="{{f.food_photo.url}}" class="food-image">
+     <div class="food-details">
+       <p><strong>{{f.name}}</strong> - ${{f.price}}</p>
+       <p><i>{{f.description}}</i></p>
+       <form method="post" action="{% url 'cart_add' %}">
+         {% csrf_token %}
+         <input type="hidden" name="food_id" value="{{ f.pk }}">
+         <input type="number" name="qty" value="1" min="1">
+         <button>Add to cart</button>
+       </form>
+     </div>
+   </div>
+ {% endfor %}
+ 
+ <a href="{% url 'cart_view' %}" class="button">View cart</a>
+ 
+ {% endblock %}
