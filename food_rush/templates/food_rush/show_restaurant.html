@@ -9,6 +9,7 @@
   {% for f in foods %}
   <li>
   <form method="post" action="{% url 'cart_add' %}">
+    <img src="{{f.food_photo.url}}" > <br>
     {{f.name}} - ${{f.price}} <br>
     <i>{{f.description}}</i>
     <hr>

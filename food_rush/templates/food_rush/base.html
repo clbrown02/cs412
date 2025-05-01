@@ -1,41 +1,43 @@
 <!-- food_rush/templates/food_rush/base.html -->
  
-{% load static %}
-<html>
- <head>
-   <title>Food Rush</title>
-   <!-- add the css link here -->
-   <link rel="stylesheet" href="{% static 'food-rush.css' %}">
- </head>
+ {% load static %}
+ <html>
+  <head>
+    <title>Food Rush</title>
+    <!-- add the css link here -->
+    <link rel="stylesheet" href="{% static 'food-rush.css' %}">
+  </head>
 
- <body>
-   <header>
-     <h1 id="title">Food Rush</h1>
-     <!-- navigation goes here -->
-      <!-- aded nav -->
-     <nav class="navbar">
-      <ul>
-       <li>
-         <a href="{% url 'show_restaurants' %}">Restaurants</a>
-       </li>
-       {% if request.user.is_authenticated %}
-       <a class="active"><form method="post" action="{% url 'food_rush_logout' %}">
-         {% csrf_token %}
-         <button type="submit" >Logout</button>
-         <input type="hidden" name="next" value="{% url 'food_rush_logout'  %}">
-     </form>
-       </a>
-       {% else %}
-       <!-- URLs for users that are NOT logged in -->
-        <li><a href="{% url 'create_customer' %}">Create an account</a></li>
-        <li><a href="{% url 'food_rush_login' %}">Login</a></li>
-        {% endif %}
-      </ul>
-     </nav>
-   </header>
+  <body>
+    <header>
+      <h1 id="title">Food Rush</h1>
+      <!-- navigation goes here -->
+       <!-- aded nav -->
+      <nav class="navbar">
+       <ul>
+        <li>
+          <a href="{% url 'show_restaurants' %}">Restaurants</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'order_history' %}">Order history</a></li>
+        <li><a class="active"><form method="post" action="{% url 'food_rush_logout' %}">
+          {% csrf_token %}
+          <button type="submit" >Logout</button>
+          <input type="hidden" name="next" value="{% url 'food_rush_logout'  %}">
+      </form>
+        </a>
+      </li>
+        {% else %}
+        <!-- URLs for users that are NOT logged in -->
+         <li><a href="{% url 'create_customer' %}">Create an account</a></li>
+         <li><a href="{% url 'food_rush_login' %}">Login</a></li>
+         {% endif %}
+       </ul>
+      </nav>
+    </header>
 
-   {%block content %}
-   {% endblock %}
+    {%block content %}
+    {% endblock %}
 
- </body>
-</html>
+  </body>
+ </html>

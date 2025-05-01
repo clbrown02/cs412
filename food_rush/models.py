@@ -61,6 +61,7 @@ class Food_item(models.Model):
   restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
   price = models.DecimalField(max_digits=5,decimal_places=2)
   description = models.TextField(blank=False)
+  food_photo = models.ImageField(blank=True)
 
   def __str__(self):
     '''Return a string representation of this Food_item object'''
